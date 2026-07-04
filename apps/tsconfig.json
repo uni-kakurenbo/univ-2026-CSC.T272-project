@@ -1,0 +1,10 @@
+{
+    "files": [],
+    "references": [
+        { "path": "shared" },
+        { "path": "visualizer" },
+        { "path": "server" },
+        { "path": "runner" },
+        { "path": "adaptor" }
+    ]
+}

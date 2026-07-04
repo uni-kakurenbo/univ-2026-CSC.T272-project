@@ -1,0 +1,17 @@
+{
+    "name": "@app/adaptor",
+    "version": "0.1.0",
+    "private": true,
+    "type": "module",
+    "scripts": {
+        "build": "bun build --target bun --outfile dist/main.js src/main.ts",
+        "duck": "bun run src/main.ts --url ws://localhost:3000/ws/agent/duck --exec ./build/duck-agent.exe",
+        "sphinx": "bun run src/main.ts --url ws://localhost:3000/ws/agent/sphinx --exec ./build/sphinx-agent.exe",
+        "build:agents": "bun run src/tools/buildAgents.ts",
+        "typecheck": "tsc --noEmit -p tsconfig.json"
+    },
+    "devDependencies": {
+        "@types/bun": "1.3.14",
+        "typescript": "6.0.3"
+    }
+}

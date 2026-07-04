@@ -1,0 +1,17 @@
+{
+    "version": "0.0.1",
+    "configurations": [
+        {
+            "name": "server",
+            "runtimeExecutable": "bun",
+            "runtimeArgs": ["run", "start:server"],
+            "port": 3000
+        },
+        {
+            "name": "visualizer",
+            "runtimeExecutable": "bun",
+            "runtimeArgs": ["run", "dev:visualizer"],
+            "port": 5173
+        }
+    ]
+}

@@ -1,0 +1,33 @@
+name: univ-2026-csc-t272-project-prod
+
+services:
+    server:
+        build:
+            context: .
+            dockerfile: docker/prod/server.Dockerfile
+        environment:
+            HOST: 0.0.0.0
+            # Path overriding: client and API share the https://example.com
+            # origin, so the Origin header on same-origin requests is this
+            # origin, not the internal server:3000 address.
+            ALLOWED_ORIGINS: https://example.com
+            MATCH_HISTORY_DIR: /app/data/matches
+        volumes:
+            - ./data:/app/data
+        restart: unless-stopped
+
+    client:
+        build:
+            context: .
+            dockerfile: docker/prod/visualizer.Dockerfile
+            target: client
+            args:
+                # Same-origin default: the client calls the API at /api on
+                # whatever origin it is served from. Only override this if
+                # the API is reachable at a different origin than the client.
+                VITE_SERVER_ORIGIN: /
+        depends_on:
+            - server
+        ports:
+            - "80:80"
+        restart: unless-stopped

@@ -1,0 +1,39 @@
+services:
+    server:
+        build:
+            context: .
+            dockerfile: docker/dev/server.Dockerfile
+        environment:
+            HOST: 0.0.0.0
+            ALLOWED_ORIGINS: http://localhost:8080
+            MATCH_HISTORY_DIR: /app/data/matches
+        ports:
+            - "127.0.0.1:3000:3000"
+        volumes:
+            - ./apps:/app/apps:ro
+            - ./package.json:/app/package.json:ro
+            - ./bun.lock:/app/bun.lock:ro
+            - ./data:/app/data
+            - /app/apps/adaptor/node_modules
+            - /app/apps/runner/node_modules
+            - /app/apps/server/node_modules
+            - /app/apps/shared/node_modules
+            - /app/apps/visualizer/node_modules
+
+    visualizer:
+        build:
+            context: .
+            dockerfile: docker/dev/visualizer.Dockerfile
+        ports:
+            - "127.0.0.1:8080:5173"
+        depends_on:
+            - server
+        volumes:
+            - ./apps:/app/apps:ro
+            - ./package.json:/app/package.json:ro
+            - ./bun.lock:/app/bun.lock:ro
+            - /app/apps/adaptor/node_modules
+            - /app/apps/runner/node_modules
+            - /app/apps/server/node_modules
+            - /app/apps/shared/node_modules
+            - /app/apps/visualizer/node_modules

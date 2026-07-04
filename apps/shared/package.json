@@ -1,0 +1,16 @@
+{
+    "name": "@app/shared",
+    "version": "0.1.0",
+    "private": true,
+    "type": "module",
+    "exports": {
+        "./types": "./src/types.ts",
+        "./random": "./src/random.ts"
+    },
+    "scripts": {
+        "typecheck": "tsc --noEmit -p tsconfig.json"
+    },
+    "devDependencies": {
+        "typescript": "6.0.3"
+    }
+}
